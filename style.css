@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+    padding: 0;
+}
+
+h1{
+    background-color: darkgoldenrod;
+    margin: 0;
+
+}
+
+.sidebar {
+    width: 18em;
+    height: 100vh;
+    background-color: chartreuse;
+    padding: 3px;
+    padding-left: 5px;
+}
