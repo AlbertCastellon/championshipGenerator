@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Generador de campionats</h1>
+    <h1>Generador de campionats 🏆</h1>
     <div class="sidebar">
-        <label for="num">Nº d'equips</label>
-        <input onchange="guardar()" type="number" id="num" max="32" placeholder="nombre d'equips">
-        <button id="actualitzar" onclick="generateTeams()">Actualitza</button>
+        <label id="WhiteText" for="num">Nº d'equips</label>
+        <input onchange="guardar()" type="number" id="num" min="2" max="32"  placeholder="nombre d'equips">
+        <button id="actualitzar" onclick="actu()">Actualitza</button>
     </div>
+    <main id="main">
+
+    </main>
 
     <script src="script.js">      
     </script>

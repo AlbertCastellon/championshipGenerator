@@ -1,18 +1,33 @@
 body {
     font-family: sans-serif;
     padding: 0;
+    background-color: rgb(107, 164, 217);
 }
 
 h1{
-    background-color: darkgoldenrod;
+    background-color: rgb(0, 48, 138);
     margin: 0;
+    color: aliceblue;
 
 }
 
 .sidebar {
     width: 18em;
     height: 100vh;
-    background-color: chartreuse;
+    background-color: rgb(157, 204, 255);
     padding: 3px;
     padding-left: 5px;
+}
+button{ 
+    background-color: rgb(143, 197, 255);
+    color: aliceblue;
+    font-weight: bold;
+    border-color: white;
+}
+#num{
+width: 40%; 
+}
+#WhiteText{
+    color: rgb(45, 54, 57);
+    font-weight: bold;
 }
