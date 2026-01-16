@@ -11,16 +11,23 @@ const guardar = () => {
 
 const generateMatches = () => {
     for (let i = 0; i < arrTeams.length; i += 2) {
+        const team1 = document.createElement("div")
+        const team2 = document.createElement("div")
+        team1.classList.add("team")
+        team2.classList.add("team")
         if (arrTeams[i + 1]) {
-            arrMatches.push(arrTeams[i] + " vs " + arrTeams[i + 1]);
+            team1.textContent = arrTeams[i]
+            team2.textContent = arrTeams[i + 1]
+            arrMatches.push([team1, team2]);
         } else {
-            arrMatches.push(arrTeams[i] + " descansa"); // O alguna otra opción
+            team1.textContent = arrTeams[i]
+            arrMatches.push([team1]); // O alguna otra opción
         }
     }
 }
 
 const generateTeams = () => {
-    if (numEquips < 33 && numEquips > 1) {
+    if ((numEquips < 33 && numEquips > 1)) {
         while (arrTeams.length > 0) {
             arrTeams.pop();
         }
@@ -40,19 +47,32 @@ const createTable = (arr) => {
 }
 const createCards = (element) => {
     const card = document.createElement("div")
-    const match = document.createElement("h3")
-    match.textContent = element
-    card.appendChild(match)
+    card.classList.add('card')
+    const freeMatch = document.createElement("div")
+    freeMatch.textContent = "descansa"
+    card.appendChild(element[0])
+    if(element[1]) {
+        card.appendChild(element[1])
+    }else {
+        card.appendChild(freeMatch)
+    }
+    
     return card;
 
 }
 
 
-const actu = () => {
+const render = () => {
     generateTeams();
     arrMatches.length = 0;
     main.innerHTML = "";
     generateMatches();
+   
+    createTable(arrMatches)
+    const teams = document.querySelectorAll('.team')
+    teams.forEach(e => e.addEventListener('click', () => {
+        e.classList.add("winer")
+    }))
 }
 
 
