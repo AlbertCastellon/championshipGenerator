@@ -1,41 +1,41 @@
 const actualitzarBtn = document.getElementById("actualitzar")
 let numEquips
-const arrTeams = []
-const arrMatches = []
+let currentTeams = []  
+let nextRoundTeams = [] 
+let arrMatches = []
 const main = document.getElementById('main')
 
 const guardar = () => {
-    numEquips = document.getElementById('num').value;
-    console.log(numEquips)
+     numEquips = Number(document.getElementById('num').value)
 }
 
 const generateMatches = () => {
-    for (let i = 0; i < arrTeams.length; i += 2) {
+    arrMatches.length = 0
+
+    for (let i = 0; i < currentTeams.length; i += 2) {
         const team1 = document.createElement("div")
-        const team2 = document.createElement("div")
         team1.classList.add("team")
-        team2.classList.add("team")
-        if (arrTeams[i + 1]) {
-            team1.textContent = arrTeams[i]
-            team2.textContent = arrTeams[i + 1]
-            arrMatches.push([team1, team2]);
+        team1.textContent = currentTeams[i]
+
+        if (currentTeams[i + 1]) {
+            const team2 = document.createElement("div")
+            team2.classList.add("team")
+            team2.textContent = currentTeams[i + 1]
+            arrMatches.push([team1, team2])
         } else {
-            team1.textContent = arrTeams[i]
-            arrMatches.push([team1]); // O alguna otra opción
+            arrMatches.push([team1]) 
+            nextRoundTeams.push(currentTeams[i])
         }
     }
 }
 
 const generateTeams = () => {
-    if ((numEquips < 33 && numEquips > 1)) {
-        while (arrTeams.length > 0) {
-            arrTeams.pop();
-        }
+    if (numEquips >= 2 && numEquips <= 32) {
+        currentTeams = []
         for (let i = 0; i < numEquips; i++) {
-            arrTeams.push("Equip " + (i + 1))
+            currentTeams.push("Equip " + (i + 1))
         }
-    }
-    else {
+    } else {
         alert("El nombre d'equips ha d'estar entre 2 i 32")
     }
 }
@@ -62,19 +62,56 @@ const createCards = (element) => {
 }
 
 
-const render = () => {
-    generateTeams();
-    arrMatches.length = 0;
-    main.innerHTML = "";
-    generateMatches();
-   
-    createTable(arrMatches)
+
+const addTeamListeners = () => {
     const teams = document.querySelectorAll('.team')
-    teams.forEach(e => e.addEventListener('click', () => {
-        e.classList.add("winer")
-    }))
+
+    teams.forEach(team => {
+        team.addEventListener('click', () => {
+            if (team.classList.contains('winner')) return
+
+            team.classList.add('winner')
+            nextRoundTeams.push(team.textContent)
+
+            const parent = team.parentElement
+            parent.querySelectorAll('.team').forEach(t => {
+                t.style.pointerEvents = "none"
+            })
+
+            checkRoundEnd()
+        })
+    })
 }
 
 
+const checkRoundEnd = () => {
+    const totalMatches = arrMatches.length
 
+    if (nextRoundTeams.length === totalMatches) {
+        setTimeout(nextRound, 800)
+    }
+}
+const render = () => {
+    main.innerHTML = ""
+    generateMatches()
+    createTable(arrMatches)
+    addTeamListeners()
+}
 
+const nextRound = () => {
+    if (nextRoundTeams.length === 1) {
+        alert(`🏆 Campeón: ${nextRoundTeams[0]}`)
+        return
+    }
+
+    currentTeams = [...nextRoundTeams]
+    nextRoundTeams = []
+    render()
+}
+
+actualitzarBtn.addEventListener('click', () => {
+    guardar()
+    generateTeams()
+    nextRoundTeams = []
+    render()
+})
