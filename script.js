@@ -23,6 +23,7 @@ const generateMatches = () => {
             team2.textContent = currentTeams[i + 1]
             arrMatches.push([team1, team2])
         } else {
+            team1.classList.add('winner')
             arrMatches.push([team1]) 
             nextRoundTeams.push(currentTeams[i])
         }
@@ -40,15 +41,23 @@ const generateTeams = () => {
     }
 }
 
-
 const createTable = (arr) => {
     const newArr = arr.map(e => createCards(e))
-    newArr.forEach(e => main.appendChild(e))
+    const round = document.createElement("div")
+    round.classList.add('round')
+
+    newArr.forEach(card => {
+        round.appendChild(card)
+    })
+
+    main.appendChild(round)
 }
+
 const createCards = (element) => {
     const card = document.createElement("div")
     card.classList.add('card')
     const freeMatch = document.createElement("div")
+    freeMatch.classList.add('winner')
     freeMatch.textContent = "descansa"
     card.appendChild(element[0])
     if(element[1]) {
@@ -72,8 +81,9 @@ const addTeamListeners = () => {
 
             team.classList.add('winner')
             nextRoundTeams.push(team.textContent)
-
+            
             const parent = team.parentElement
+            parent.classList.add('concluded')
             parent.querySelectorAll('.team').forEach(t => {
                 t.style.pointerEvents = "none"
             })
@@ -92,7 +102,6 @@ const checkRoundEnd = () => {
     }
 }
 const render = () => {
-    main.innerHTML = ""
     generateMatches()
     createTable(arrMatches)
     addTeamListeners()
@@ -110,6 +119,7 @@ const nextRound = () => {
 }
 
 actualitzarBtn.addEventListener('click', () => {
+    main.innerHTML= ''
     guardar()
     generateTeams()
     nextRoundTeams = []

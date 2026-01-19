@@ -98,8 +98,7 @@ button:active {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    margin: 1rem;
-    width: 100%;
+    min-width: 200px;
 }
 
 .card:hover {
@@ -108,11 +107,34 @@ button:active {
 }
 
 .card h3 {
-    color: #667eea;
+    color: #000000;
     font-size: 1.1rem;
     font-weight: 600;
     text-align: center;
 }
-.winer {
-    background-color: cadetblue;
+.winner {
+    font-weight: 1000;
+}
+
+.concluded {
+    background: rgba(0, 255, 51, 0.95);
+}
+main {
+    display: flex;
+    flex-direction: row;
+    padding: 2rem;
+    gap: 3rem;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: auto;
+    flex: 1;
+}
+
+.round {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    gap: 1.5rem;
+    min-width: 250px;
+    flex-shrink: 0;
 }
