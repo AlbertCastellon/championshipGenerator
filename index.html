@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <h1>Generador de campionats 🏆</h1>
     </header>
     <div class="site">
         <div class="sidebar">
+           
+            
             <label id="WhiteText" for="num">Nº d'equips</label>
-            <input onchange="guardar()" type="number" id="num" min="2" max="32"  placeholder="nombre d'equips">
+            <input onchange="guardarNum()" type="number" id="num" min="2" max="32" placeholder="nombre d'equips">
+             <form action="">
+                
+                <input type="radio" id="nomLletres" name="nom" value="lletres">
+                <label for="nomLletres">Noms d'equips amb lletres</label><br>
+                <input type="radio" id="NomsNums" name="nom" value="Nums">
+                <label for="NomsNums">Noms d'equips amb nombres</label><br> <br>
+            </form>
             <button id="actualitzar" onclick="render()">Actualitza</button>
+            
         </div>
         <main id="main">
 
         </main>
     </div>
-    <script src="script.js">      
+    <script src="script.js">
     </script>
 </body>
+
 </html>

@@ -5,8 +5,14 @@ let nextRoundTeams = []
 let arrMatches = []
 const main = document.getElementById('main')
 
-const guardar = () => {
+const guardarNum = () => {
      numEquips = Number(document.getElementById('num').value)
+}
+
+const teamsNames = () => {
+
+    let teamName = document.getElementById("nomLletres").checked
+    return teamName;
 }
 
 const generateMatches = () => {
@@ -33,8 +39,14 @@ const generateMatches = () => {
 const generateTeams = () => {
     if (numEquips >= 2 && numEquips <= 32) {
         currentTeams = []
-        for (let i = 0; i < numEquips; i++) {
-            currentTeams.push("Equip " + (i + 1))
+        if(teamsNames()){
+            for (let i = 0; i < numEquips; i++) {
+                currentTeams.push("Equip " + String.fromCharCode(65 + i))
+            }
+        }else{
+            for (let i = 0; i < numEquips; i++) {
+                currentTeams.push("Equip " + (i + 1))
+            }
         }
     } else {
         alert("El nombre d'equips ha d'estar entre 2 i 32")
@@ -120,7 +132,7 @@ const nextRound = () => {
 
 actualitzarBtn.addEventListener('click', () => {
     main.innerHTML= ''
-    guardar()
+    guardarNum()
     generateTeams()
     nextRoundTeams = []
     render()
