@@ -124,7 +124,7 @@ const nextRound = () => {
         alert(`🏆 Campeón: ${nextRoundTeams[0]}`)
         return
     }
-
+    nextRoundTeams.sort();
     currentTeams = [...nextRoundTeams]
     nextRoundTeams = []
     render()
